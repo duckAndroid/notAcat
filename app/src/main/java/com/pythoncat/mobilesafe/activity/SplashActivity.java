@@ -1,9 +1,7 @@
 package com.pythoncat.mobilesafe.activity;
 
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -14,7 +12,7 @@ import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.mobilesafe.R;
 import com.pythoncat.mobilesafe.base.BaseAppCompactActivity;
 import com.pythoncat.mobilesafe.engine.UpdateEngine;
-import com.pythoncat.mobilesafe.view.NotifyHelper;
+import com.pythoncat.mobilesafe.viewHelper.NotifyHelperSimple;
 import com.pythoncat.mobilesafe.viewHelper.AppDialoghelper;
 import com.pythoncat.proxy.App;
 import com.pythoncat.proxy.base.RxJavaUtil;
@@ -81,11 +79,13 @@ public class SplashActivity extends BaseAppCompactActivity {
         if (appUpdate == null) {
             appUpdate = new AppDialoghelper(get(), v -> {
                 appUpdate.cancel();
-                NotifyHelper.sendProgressNotification(manager, builder,
-                        "我第一个被发现", "我是标题", "我是内容",
-                        R.drawable.cat01,
-                        PendingIntent.getActivity(this, 0, new Intent(get(), SplashActivity.class), PendingIntent.FLAG_UPDATE_CURRENT),
-                        false, false, false);
+//                NotifyHelper.sendProgressNotification(manager, builder,
+//                        "我第一个被发现", "我是标题", "我是内容",
+//                        R.drawable.cat01,
+//                        PendingIntent.getActivity(this, 0, new Intent(get(), SplashActivity.class), PendingIntent.FLAG_UPDATE_CURRENT),
+//                        false, false, false);
+
+                NotifyHelperSimple.show(manager, builder, "我第一个被发现", "我是标题", "我是内容");
             });
         }
         appUpdate.showDialog();
@@ -96,7 +96,8 @@ public class SplashActivity extends BaseAppCompactActivity {
                             if (progress <= 1) progress = 1;
                             LogUtils.w("progress====" + progress + ", p=" + download.progress + " , to=" + download.total);
                             appUpdate.pbProgress.setProgress(progress);
-                            NotifyHelper.updateProgress(manager, builder, progress);
+//                            NotifyHelper.updateProgress(manager, builder, progress);
+                            NotifyHelperSimple.update(manager, builder, progress, "下载完成！");
                         }, error,
                         () -> {
                             appUpdate.cancel();
@@ -113,5 +114,7 @@ public class SplashActivity extends BaseAppCompactActivity {
         }
         RxJavaUtil.close(updateApkS);
         RxJavaUtil.close(checkS);
+
+        NotifyHelperSimple.cancel(manager);
     }
 }

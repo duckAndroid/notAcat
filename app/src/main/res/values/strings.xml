@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MobileSafe</string>
+    <string name="app_name">Not A Cat</string>
     <string name="cur_version">当前版本：%1$s</string>
     <string name="can_update">需要更新版本，是否现在更新....?</string>
     <string name="update_now">现在更新</string>
