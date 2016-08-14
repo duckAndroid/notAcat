@@ -9,6 +9,7 @@ import com.pythoncat.proxy.base.EventBusUtil;
 
 /**
  * Created by pythonCat on 2016/8/14 0014.
+ * base activity
  */
 public class BaseAppCompactActivity extends AppCompatActivity {
 

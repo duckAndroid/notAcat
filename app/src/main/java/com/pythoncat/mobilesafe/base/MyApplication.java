@@ -6,6 +6,7 @@ import com.pythoncat.proxy.App;
 
 /**
  * Created by pythonCat on 2016/8/14 0014.
+ * Application
  */
 public class MyApplication extends Application {
 

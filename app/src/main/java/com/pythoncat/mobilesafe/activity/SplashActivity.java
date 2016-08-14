@@ -13,7 +13,7 @@ import com.pythoncat.mobilesafe.R;
 import com.pythoncat.mobilesafe.base.BaseAppCompactActivity;
 import com.pythoncat.mobilesafe.engine.UpdateEngine;
 import com.pythoncat.mobilesafe.viewHelper.NotifyHelperSimple;
-import com.pythoncat.mobilesafe.viewHelper.AppDialoghelper;
+import com.pythoncat.mobilesafe.viewHelper.AppDialogHelper;
 import com.pythoncat.proxy.App;
 import com.pythoncat.proxy.base.RxJavaUtil;
 import com.pythoncat.proxy.bean.Update;
@@ -29,7 +29,7 @@ import rx.functions.Action1;
 public class SplashActivity extends BaseAppCompactActivity {
 
     private CoordinatorLayout container;
-    private AppDialoghelper appUpdate;
+    private AppDialogHelper appUpdate;
     private Subscription checkS;
     private Subscription updateApkS;
     private NotificationCompat.Builder builder;
@@ -77,7 +77,7 @@ public class SplashActivity extends BaseAppCompactActivity {
         //
         LogUtils.e("现在更新........!!! todo");
         if (appUpdate == null) {
-            appUpdate = new AppDialoghelper(get(), v -> {
+            appUpdate = new AppDialogHelper(get(), v -> {
                 appUpdate.cancel();
 //                NotifyHelper.sendProgressNotification(manager, builder,
 //                        "我第一个被发现", "我是标题", "我是内容",

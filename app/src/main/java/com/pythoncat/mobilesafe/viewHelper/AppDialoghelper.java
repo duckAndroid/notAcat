@@ -13,7 +13,7 @@ import com.pythoncat.mobilesafe.R;
  * Created by pythonCat on 2016/8/14 0014.
  * app升级提醒对话框
  */
-public class AppDialoghelper {
+public class AppDialogHelper {
 
     private final Activity a;
     private View root;
@@ -27,7 +27,7 @@ public class AppDialoghelper {
      * @param a context
      * @param listener 后台升级按钮点击监听器
      */
-    public AppDialoghelper(Activity a, View.OnClickListener listener) {
+    public AppDialogHelper(Activity a, View.OnClickListener listener) {
         init(a, listener);
         this.a = a;
     }
@@ -41,7 +41,7 @@ public class AppDialoghelper {
         pbProgress.setMax(100);
     }
 
-    public AppDialoghelper showDialog() {
+    public AppDialogHelper showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(a)
                 .setView(root);
         if (appDialog == null) {
