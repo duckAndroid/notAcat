@@ -1,12 +1,9 @@
 package com.pythoncat.mobilesafe.activity;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -17,6 +14,7 @@ import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.mobilesafe.R;
 import com.pythoncat.mobilesafe.base.BaseAppCompactActivity;
 import com.pythoncat.mobilesafe.engine.UpdateEngine;
+import com.pythoncat.mobilesafe.view.NotifyHelper;
 import com.pythoncat.mobilesafe.viewHelper.AppDialoghelper;
 import com.pythoncat.proxy.App;
 import com.pythoncat.proxy.base.RxJavaUtil;
@@ -32,7 +30,6 @@ import rx.functions.Action1;
  */
 public class SplashActivity extends BaseAppCompactActivity {
 
-    private static final int NOTIFICATION_ID = 1024 + 21;
     private CoordinatorLayout container;
     private AppDialoghelper appUpdate;
     private Subscription checkS;
@@ -49,6 +46,7 @@ public class SplashActivity extends BaseAppCompactActivity {
         tvVersion.setText(App.getString(R.string.cur_version, PackageUtil.getVersionName(App.get())));
         container = (CoordinatorLayout) findViewById(R.id.splash_coor_layout);
         manager = (NotificationManager) get().getSystemService(Context.NOTIFICATION_SERVICE);
+        builder = new NotificationCompat.Builder(get());
         checkVersion();
     }
 
@@ -83,7 +81,8 @@ public class SplashActivity extends BaseAppCompactActivity {
         if (appUpdate == null) {
             appUpdate = new AppDialoghelper(get(), v -> {
                 appUpdate.cancel();
-                sendProgressNotification("我第一个被发现", "我是标题", "我是内容",
+                NotifyHelper.sendProgressNotification(manager, builder,
+                        "我第一个被发现", "我是标题", "我是内容",
                         R.drawable.cat01,
                         PendingIntent.getActivity(this, 0, new Intent(get(), SplashActivity.class), PendingIntent.FLAG_UPDATE_CURRENT),
                         false, false, false);
@@ -97,6 +96,7 @@ public class SplashActivity extends BaseAppCompactActivity {
                             if (progress <= 1) progress = 1;
                             LogUtils.w("progress====" + progress + ", p=" + download.progress + " , to=" + download.total);
                             appUpdate.pbProgress.setProgress(progress);
+                            NotifyHelper.updateProgress(manager, builder, progress);
                         }, error,
                         () -> {
                             appUpdate.cancel();
@@ -113,68 +113,5 @@ public class SplashActivity extends BaseAppCompactActivity {
         }
         RxJavaUtil.close(updateApkS);
         RxJavaUtil.close(checkS);
-    }
-//    ################################
-
-    public void sample(String ticker, String title, String content, int smallIcon, PendingIntent intent, boolean sound, boolean vibrate, boolean lights) {
-        builder = new NotificationCompat.Builder(get());
-        builder.setTicker(ticker);
-        builder.setContentTitle(title);
-        builder.setContentText(content);
-        builder.setContentIntent(intent);
-        builder.setColor(Color.RED);
-        builder.setSmallIcon(smallIcon);
-        builder.setLargeIcon(BitmapFactory.decodeResource(App.get().getResources(), R.mipmap.ic_launcher));
-        builder.setWhen(System.currentTimeMillis());
-        builder.setAutoCancel(true);
-        builder.setPriority(NotificationCompat.PRIORITY_MAX);
-        int defaults = 0;
-        if (sound) {
-            defaults |= Notification.DEFAULT_SOUND;
-        }
-        if (vibrate) {
-            defaults |= Notification.DEFAULT_VIBRATE;
-        }
-        if (lights) {
-            defaults |= Notification.DEFAULT_LIGHTS;
-        }
-        builder.setDefaults(defaults);
-        builder.setOngoing(true);
-    }
-
-    public void sendSingleLineNotification(String ticker, String title, String content, int smallIcon, PendingIntent intent, boolean sound, boolean vibrate, boolean lights) {
-        sample(ticker, title, content, smallIcon, intent, sound, vibrate, lights);
-        Notification notification = builder.build();
-        send(notification);
-    }
-
-//    ################################ @@@@@@@@@@@@@@@
-//    ################################ @@@@@@@@@@@@@@@
-//    ################################ @@@@@@@@@@@@@@@
-//    ################################ @@@@@@@@@@@@@@@
-
-    public void sendProgressNotification(String ticker, String title, String content, int smallIcon, PendingIntent intent, boolean sound, boolean vibrate, boolean lights) {
-        sample(ticker, title, content, smallIcon, intent, sound, vibrate, lights);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i <= 100; i += 10) {
-                    builder.setProgress(100, i, false);
-                    send(builder.build());
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                //下载完成
-                builder.setContentText("下载完成").setProgress(0, 0, false);
-                send(builder.build());
-            }
-        }).start();
-    }
-
-    private void send(Notification build) {
-        manager.notify(1024, builder.build());
     }
 }
