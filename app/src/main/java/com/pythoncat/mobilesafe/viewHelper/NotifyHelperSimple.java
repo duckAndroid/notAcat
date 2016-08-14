@@ -38,8 +38,6 @@ public class NotifyHelperSimple {
             mNotifyManager.notify(id, mBuilder.build());
         }
     }
-
-
     public static void cancel(@Nullable NotificationManager mNotifyManager) {
         if (mNotifyManager == null) return;
         mNotifyManager.cancel(id);
