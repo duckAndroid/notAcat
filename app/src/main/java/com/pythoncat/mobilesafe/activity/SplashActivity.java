@@ -114,7 +114,6 @@ public class SplashActivity extends BaseAppCompactActivity {
         }
         RxJavaUtil.close(updateApkS);
         RxJavaUtil.close(checkS);
-
         NotifyHelperSimple.cancel(manager);
     }
 }

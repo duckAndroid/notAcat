@@ -3,6 +3,7 @@ package com.pythoncat.mobilesafe.viewHelper;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 
 /**
@@ -32,7 +33,8 @@ public class NotifyHelper extends Notify {
         send(manager, builder.build(), id);
     }
 
-    public static void cancel(NotificationManager manager) {
-        manager.cancel(id);
+    public static void cancel(@Nullable NotificationManager mNotifyManager) {
+        if (mNotifyManager == null) return;
+        mNotifyManager.cancel(id);
     }
 }
