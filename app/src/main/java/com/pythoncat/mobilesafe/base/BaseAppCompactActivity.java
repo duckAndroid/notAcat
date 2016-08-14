@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.pythoncat.proxy.base.EventBusUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Created by pythonCat on 2016/8/14 0014.
  * base activity
@@ -21,6 +23,7 @@ public class BaseAppCompactActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         EventBusUtil.unregister(this);
     }
 
