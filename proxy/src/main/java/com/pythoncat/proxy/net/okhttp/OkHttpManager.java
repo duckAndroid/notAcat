@@ -60,7 +60,8 @@ public class OkHttpManager {
         }
         HostnameVerifier DO_NOT_VERIFY = (hostname, session) -> true;
         return new OkHttpClient.Builder()
-                .sslSocketFactory(sslContext.getSocketFactory(), Platform.get().trustManager(sslContext.getSocketFactory()))
+                .sslSocketFactory(sslContext.getSocketFactory(),
+                        Platform.get().trustManager(sslContext.getSocketFactory()))
                 .hostnameVerifier(DO_NOT_VERIFY);
     }
 }

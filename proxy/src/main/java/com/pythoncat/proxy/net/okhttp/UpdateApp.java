@@ -97,10 +97,13 @@ public class UpdateApp {
     public static Observable<Download> downloadFileWithProgress(String url, String dirPath, String localName) {
         String destPath = new File(dirPath, localName).getAbsolutePath();
         return Observable.create(new Observable.OnSubscribe<Download>() {
+            int pro = 0;
+
             @Override
             public void call(Subscriber<? super Download> subscriber) {
                 try {
                     new Progress().run(url, dirPath, localName, (bytesRead, contentLength, done) -> {
+                        pro += bytesRead;
                         subscriber.onNext(new Download(bytesRead, contentLength, done, destPath));
                         if (done || bytesRead == contentLength) {
                             subscriber.onCompleted();
@@ -110,9 +113,9 @@ public class UpdateApp {
                     e.printStackTrace();
                     subscriber.onError(e);
                 }
-
             }
         })
+                .onBackpressureBuffer()
 //                .onBackpressureDrop() // todo 进度回调太多，消费不过来就丢弃一部分
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
