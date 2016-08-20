@@ -1,6 +1,7 @@
 package com.pythoncat.nocat.viewHelper;
 
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.pythoncat.nocat.R;
@@ -8,6 +9,7 @@ import com.pythoncat.nocat.activity.MainActivity;
 import com.pythoncat.nocat.base.BaseFragment;
 import com.pythoncat.nocat.fragment.CameraFragment;
 import com.pythoncat.nocat.fragment.HeadFragment;
+import com.pythoncat.nocat.view.BadgeView;
 
 /**
  * Created by pythonCat on 2016/8/21 0021.
@@ -32,6 +34,10 @@ public class LeftMenusHelper {
             mActivity.closeDrawer();
         });
         RadioGroup rg = (RadioGroup) rootView.findViewById(R.id.left_menu_rg);
+        RadioButton rb01 = (RadioButton) rootView.findViewById(R.id.rb_item01);
+        RadioButton rb02 = (RadioButton) rootView.findViewById(R.id.rb_item02);
+        RadioButton rb03 = (RadioButton) rootView.findViewById(R.id.rb_item03);
+        RadioButton rb04 = (RadioButton) rootView.findViewById(R.id.rb_item04);
         rg.check(R.id.rb_item01); // default
         replaceFragment(CameraFragment.newInstance("xxx", "xx")); // default
         rg.setOnCheckedChangeListener((group, checkedId) -> {
@@ -59,5 +65,17 @@ public class LeftMenusHelper {
                 .replace(R.id.fragment_container,
                         bf)
                 .commit();
+    }
+
+    public void setBadge(View target, int badge) {
+        BadgeView badgeView = new BadgeView(mActivity);
+        badgeView.setTargetView(target);
+        badgeView.setBadgeCount(badge);
+    }
+
+    public void setBadge(int id, int badge) {
+        BadgeView badgeView = new BadgeView(mActivity);
+        badgeView.setTargetView(rootView.findViewById(id));
+        badgeView.setBadgeCount(badge);
     }
 }
