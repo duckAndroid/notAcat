@@ -47,16 +47,81 @@
                 android:src="@android:drawable/ic_dialog_email" />
 
         </android.support.design.widget.CoordinatorLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_left_menus"
-            android:layout_width="200dp"
+        <!--侧边栏 start-->
+        <LinearLayout
+            android:id="@+id/left_menus_layout"
+            android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@color/white"
-            android:fitsSystemWindows="true">
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
 
-        </android.support.v7.widget.RecyclerView>
+            <include
+                android:id="@+id/left_menu_head"
+                layout="@layout/nav_header_main" />
+
+            <RadioGroup
+                android:id="@+id/left_menu_rg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <RadioButton
+                    android:id="@+id/rb_item01"
+                    style="@style/Custom.RadioButton"
+                    android:layout_width="match_parent"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/ic_menu_camera"
+                    android:text="@string/camera" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <RadioButton
+                    android:id="@+id/rb_item02"
+                    style="@style/Custom.RadioButton"
+                    android:layout_width="match_parent"
+                    android:drawableLeft="@drawable/ic_menu_gallery"
+                    android:text="@string/gallery" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <RadioButton
+                    android:id="@+id/rb_item03"
+                    style="@style/Custom.RadioButton"
+                    android:layout_width="match_parent"
+
+                    android:drawableLeft="@drawable/ic_menu_slideshow"
+                    android:text="@string/video" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <RadioButton
+                    android:id="@+id/rb_item04"
+                    style="@style/Custom.RadioButton"
+                    android:layout_width="match_parent"
+                    android:drawableLeft="@drawable/ic_menu_manage"
+                    android:text="@string/tools" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+            </RadioGroup>
+        </LinearLayout>
 
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

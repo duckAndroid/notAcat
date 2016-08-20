@@ -6,17 +6,20 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import com.pythoncat.nocat.R;
 import com.pythoncat.nocat.base.BaseAppCompactActivity;
+import com.pythoncat.nocat.viewHelper.LeftMenusHelper;
 
+/**
+ * @author pythonCat
+ */
 public class MainActivity extends BaseAppCompactActivity {
 
-    private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
 
     @Override
@@ -33,18 +36,25 @@ public class MainActivity extends BaseAppCompactActivity {
         assert fab != null;
         fab.setOnClickListener(view -> Snackbar.make(view, "做点什么呢?", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         assert drawer != null;
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        RecyclerView leftMenu = (RecyclerView) findViewById(R.id.main_left_menus);
+        initLeftmenus();
+    }
+
+    private void initLeftmenus() {
+        LinearLayout leftmenusLayout = (LinearLayout) findViewById(R.id.left_menus_layout);
+        new LeftMenusHelper((MainActivity) get(), leftmenusLayout).init();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawer != null;
         drawer.removeDrawerListener(toggle);
     }
 
@@ -68,42 +78,14 @@ public class MainActivity extends BaseAppCompactActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem item) {
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        assert drawer != null;
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
+    public void closeDrawer() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawer != null;
+        drawer.closeDrawer(GravityCompat.START);
+    }
 }

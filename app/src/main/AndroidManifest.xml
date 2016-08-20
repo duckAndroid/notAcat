@@ -5,14 +5,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.pythoncat.nocat.base.MyApplication"
+        android:name=".base.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/cat01"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name="com.pythoncat.nocat.activity.SplashActivity"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +21,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.pythoncat.nocat.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:parentActivityName="com.pythoncat.nocat.base.BaseAppCompactActivity"
+            android:parentActivityName=".base.BaseAppCompactActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

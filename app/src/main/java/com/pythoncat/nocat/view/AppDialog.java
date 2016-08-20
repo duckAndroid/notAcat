@@ -12,6 +12,8 @@ import com.pythoncat.nocat.R;
 
 /**
  * Created by pythonCat on 2016/8/14 0014.
+ *
+ * @author pythonCat
  */
 public class AppDialog extends AppCompatDialog {
 
@@ -57,6 +59,7 @@ public class AppDialog extends AppCompatDialog {
             tvTitle.setText(ch);
         }
     }
+
     public void setButtonText(CharSequence ch) {
         if (btnIsee != null) {
             btnIsee.setText(ch);

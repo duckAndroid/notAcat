@@ -1,17 +1,19 @@
 package com.pythoncat.nocat.base;
 
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.pythoncat.nocat.ToolsFragment;
 import com.pythoncat.proxy.base.EventBusUtil;
 
 /**
  * Created by pythonCat on 2016/8/14 0014.
  * base activity
  */
-public class BaseAppCompactActivity extends AppCompatActivity {
+public class BaseAppCompactActivity extends AppCompatActivity implements ToolsFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,5 +38,10 @@ public class BaseAppCompactActivity extends AppCompatActivity {
             }
         }
         return this;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

@@ -1,6 +1,8 @@
 package com.pythoncat.proxy;
 
 import android.app.Application;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 
 /**
  * Created by pythonCat on 2016/8/14 0014.
@@ -25,5 +27,12 @@ public class App {
     }
     public static String getString(int resID) {
         return get().getString(resID);
+    }
+
+    public static Drawable getDrawable(int res){
+        return get().getResources().getDrawable(res);
+    }
+    public static Resources getResources(){
+        return get().getResources();
     }
 }

@@ -15,4 +15,12 @@
     <string name="action_settings">Settings</string>
     <string name="check_version_fail">版本检测失败，可手动检测</string>
     <string name="email">pythoncat818@gmail.com</string>
+    <string name="tip_number">(%1$s)</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="camera">相机</string>
+    <string name="gallery">相册</string>
+    <string name="video">视频</string>
+    <string name="tools">工具</string>
 </resources>
