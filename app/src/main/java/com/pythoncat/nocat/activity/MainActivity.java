@@ -27,7 +27,6 @@ public class MainActivity extends BaseAppCompactActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        int badge = 9;
     }
 
     private void init() {
@@ -50,7 +49,6 @@ public class MainActivity extends BaseAppCompactActivity {
         LinearLayout leftmenusLayout = (LinearLayout) findViewById(R.id.left_menus_layout);
         LeftMenusHelper helper = new LeftMenusHelper((MainActivity) get(), leftmenusLayout);
         helper.init();
-        helper.setBadge(R.id.rb_item01,9);
     }
 
     @Override

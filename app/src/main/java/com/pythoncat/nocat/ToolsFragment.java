@@ -3,12 +3,21 @@ package com.pythoncat.nocat;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
+import com.apkfuns.logutils.LogUtils;
+import com.pythoncat.nocat.adapter.ToolsAdapter;
 import com.pythoncat.nocat.base.BaseFragment;
+import com.pythoncat.nocat.bean.Tool;
+import com.pythoncat.proxy.util.ToastHelper;
+
+import java.util.LinkedList;
+import java.util.List;
 
 
 /**
@@ -54,6 +63,72 @@ public class ToolsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tools, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        GridView guideLayout = (GridView) view.findViewById(R.id.tools_guide_view);
+        guideLayout.setNumColumns(3);
+        List<Tool> tools = loadTools();
+        ToolsAdapter adapter = new ToolsAdapter(getContext(), tools);
+        guideLayout.setAdapter(adapter);
+
+    }
+
+    private List<Tool> loadTools() {
+        List<Tool> tools = new LinkedList<>();
+        {
+            Tool ob = new Tool();
+            ob.clickListener = v -> {
+                ToastHelper.showShort("dian w le");
+                LogUtils.e("dian w le");
+            };
+            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.title = "shou ji fang dao";
+            tools.add(ob);
+        }
+        {
+            Tool ob = new Tool();
+            ob.clickListener = v -> {
+                LogUtils.e("dian w le");
+                ToastHelper.showShort("dian w le");
+            };
+            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.title = "shou ji fang dao";
+            tools.add(ob);
+        }
+        {
+            Tool ob = new Tool();
+            ob.clickListener = v -> {
+                LogUtils.e("dian w le");
+                ToastHelper.showShort("dian w le");
+            };
+            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.title = "shou ji fang dao";
+            tools.add(ob);
+        }
+        {
+            Tool ob = new Tool();
+            ob.clickListener = v -> {
+                LogUtils.e("dian w le");
+                ToastHelper.showShort("dian w le");
+            };
+            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.title = "shou ji fang dao";
+            tools.add(ob);
+        }
+        {
+            Tool ob = new Tool();
+            ob.clickListener = v -> {
+                ToastHelper.showShort("dian w le");
+                LogUtils.e("dian w le");
+            };
+            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.title = "shou ji fang dao";
+            tools.add(ob);
+        }
+
+        return tools;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
