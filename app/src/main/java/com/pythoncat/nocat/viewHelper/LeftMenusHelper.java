@@ -58,6 +58,6 @@ public class LeftMenusHelper {
                 .beginTransaction()
                 .replace(R.id.fragment_container,
                         bf)
-                .commit(); 
+                .commit();
     }
 }
