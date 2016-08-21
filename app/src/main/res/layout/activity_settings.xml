@@ -20,14 +20,14 @@
             app:checked="true"
             app:text="@string/auto_update"
             app:textcolor="#fff"
-            app:textsize="11sp" />
+            app:textsize="12sp" />
 
         <TextView
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="自动升级"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 </ScrollView>
