@@ -15,4 +15,12 @@ public class BaseFragment extends Fragment {
         super.onDestroyView();
         EventBusUtil.unregister(this);
     }
+
+    public BaseAppCompactActivity get() {
+        if (getActivity() instanceof BaseAppCompactActivity) {
+            return (BaseAppCompactActivity) getActivity();
+        } else {
+            throw new RuntimeException("caller is not a child of base activity.... ");
+        }
+    }
 }

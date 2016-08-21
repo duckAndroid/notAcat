@@ -1,6 +1,7 @@
 package com.pythoncat.nocat.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.widget.GridView;
 
 import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.nocat.R;
+import com.pythoncat.nocat.activity.SettingsActivity;
 import com.pythoncat.nocat.adapter.ToolsAdapter;
 import com.pythoncat.nocat.base.BaseFragment;
 import com.pythoncat.nocat.bean.Tool;
@@ -80,7 +82,7 @@ public class ToolsFragment extends BaseFragment {
                 LogUtils.e("dian w le");
             };
             ob.drawableId = R.drawable.cat01;
-            ob.title = "shou ji fang dao";
+            ob.title = "手机防盗";
             tools.add(ob);
         }
         {
@@ -90,7 +92,7 @@ public class ToolsFragment extends BaseFragment {
                 ToastHelper.showShort("dian w le");
             };
             ob.drawableId = R.drawable.cat02;
-            ob.title = "shou ji fang dao";
+            ob.title = "通讯卫士";
             tools.add(ob);
         }
         {
@@ -100,7 +102,7 @@ public class ToolsFragment extends BaseFragment {
                 ToastHelper.showShort("dian w le");
             };
             ob.drawableId = R.drawable.cat03;
-            ob.title = "shou ji fang dao";
+            ob.title = "软件管理";
             tools.add(ob);
         }
         {
@@ -110,7 +112,7 @@ public class ToolsFragment extends BaseFragment {
                 ToastHelper.showShort("dian w le");
             };
             ob.drawableId = R.drawable.cat04;
-            ob.title = "shou ji fang dao";
+            ob.title = "进程管理";
             tools.add(ob);
         }
         {
@@ -120,7 +122,7 @@ public class ToolsFragment extends BaseFragment {
                 LogUtils.e("dian w le");
             };
             ob.drawableId = R.drawable.cat05;
-            ob.title = "shou ji fang dao";
+            ob.title = "流量统计";
             tools.add(ob);
         }
         {
@@ -130,7 +132,39 @@ public class ToolsFragment extends BaseFragment {
                 LogUtils.e("dian w le");
             };
             ob.drawableId = R.drawable.cat06;
-            ob.title = "shou ji fang dao";
+            ob.title = "手机杀毒";
+            tools.add(ob);
+        }
+        {
+            Tool ob = new Tool();
+            ob.clickListener = v -> {
+                ToastHelper.showShort("dian w le");
+                LogUtils.e("dian w le");
+            };
+            ob.drawableId = R.drawable.cat06;
+            ob.title = "缓存清理";
+            tools.add(ob);
+        }
+        {
+            Tool ob = new Tool();
+            ob.clickListener = v -> {
+                ToastHelper.showShort("dian w le");
+                LogUtils.e("dian w le");
+            };
+            ob.drawableId = R.drawable.cat06;
+            ob.title = "高级工具";
+            tools.add(ob);
+        }
+        {
+            Tool ob = new Tool();
+            ob.clickListener = v -> {
+                ToastHelper.showShort("dian w le");
+                LogUtils.e("dian w le");
+                startActivity(new Intent(get(), SettingsActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            };
+            ob.drawableId = R.drawable.cat06;
+            ob.title = "设置中心";
             tools.add(ob);
         }
 

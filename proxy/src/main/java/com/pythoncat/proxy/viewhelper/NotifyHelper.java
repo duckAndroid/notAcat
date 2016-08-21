@@ -1,4 +1,4 @@
-package com.pythoncat.nocat.viewHelper;
+package com.pythoncat.proxy.viewhelper;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;

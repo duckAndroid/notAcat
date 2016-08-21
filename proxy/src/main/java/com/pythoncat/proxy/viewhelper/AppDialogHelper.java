@@ -1,4 +1,4 @@
-package com.pythoncat.nocat.viewHelper;
+package com.pythoncat.proxy.viewhelper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.pythoncat.nocat.R;
+import com.pythoncat.proxy.R;
 
 /**
  * Created by pythonCat on 2016/8/14 0014.

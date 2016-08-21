@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Proxy</string>
+    <string name="update_tip">正在升级</string>
+    <string name="i_see">我知道了</string>
+    <string name="down_load_on_bg">后台下载</string>
+    <string name="auto_update">自动更新</string>
 </resources>

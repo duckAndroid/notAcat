@@ -1,11 +1,9 @@
-package com.pythoncat.nocat.viewHelper;
+package com.pythoncat.proxy.viewhelper;
 
 import android.app.NotificationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
-
-import com.pythoncat.nocat.R;
 
 /**
  * Created by pythonCat on 2016/8/15 0015.
@@ -19,17 +17,19 @@ public class NotifyHelperSimple {
     private static int id = 2048;
     private static boolean showing;
 
-    public static void show(@NonNull NotificationManager mNotifyManager, @NonNull NotificationCompat.Builder mBuilder,
+    public static void show(int smallIcon, @NonNull NotificationManager mNotifyManager,
+                            @NonNull NotificationCompat.Builder mBuilder,
                             @NonNull String first, @NonNull String title, @NonNull String content) {
         mBuilder.setContentTitle(title)
                 .setTicker(first)
                 .setContentText(content)
-                .setSmallIcon(R.drawable.cat04);
+                .setSmallIcon(smallIcon);
         update(mNotifyManager, mBuilder, 0, "");
         showing = true;
     }
 
-    public static void update(@NonNull NotificationManager mNotifyManager, @NonNull NotificationCompat.Builder mBuilder,
+    public static void update(@NonNull NotificationManager mNotifyManager,
+                              @NonNull NotificationCompat.Builder mBuilder,
                               int progress, @NonNull String completedContent) {
         mBuilder.setProgress(100, progress, false);
         mNotifyManager.notify(id, mBuilder.build());

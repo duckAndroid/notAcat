@@ -13,12 +13,12 @@ import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.nocat.R;
 import com.pythoncat.nocat.base.BaseAppCompactActivity;
 import com.pythoncat.nocat.engine.UpdateEngine;
-import com.pythoncat.nocat.viewHelper.AppDialogHelper;
-import com.pythoncat.nocat.viewHelper.NotifyHelperSimple;
 import com.pythoncat.proxy.App;
 import com.pythoncat.proxy.base.RxJavaUtil;
 import com.pythoncat.proxy.bean.Update;
 import com.pythoncat.proxy.util.PackageUtil;
+import com.pythoncat.proxy.viewhelper.AppDialogHelper;
+import com.pythoncat.proxy.viewhelper.NotifyHelperSimple;
 
 import rx.Subscription;
 
@@ -114,7 +114,7 @@ public class SplashActivity extends BaseAppCompactActivity {
             appUpdateDialog = new AppDialogHelper(get(), v -> {
                 // 后台下载按钮的点击  todo --> 进入主界面，后台继续下载
                 appUpdateDialog.cancel();
-                NotifyHelperSimple.show(manager, builder, "我第一个被发现", "我是标题", "我是内容");
+                NotifyHelperSimple.show(R.drawable.cat04, manager, builder, "我第一个被发现", "我是标题", "我是内容");
                 startMain();
             });
         }
@@ -131,6 +131,7 @@ public class SplashActivity extends BaseAppCompactActivity {
                             //  todo 更新apk出错的回调
                             LogUtils.e("下载更新包出错.....");
                             appUpdateDialog.cancel();
+                            NotifyHelperSimple.cancel(manager);
                             Snackbar.make(container, R.string.update_app_fail, Snackbar.LENGTH_LONG)
                                     .setCallback(callback)
                                     .show();

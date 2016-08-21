@@ -4,9 +4,7 @@
     <string name="can_update">需要更新版本，是否现在更新....?</string>
     <string name="update_now">现在更新</string>
     <string name="cannot_update">你已经是最新版本了，不需更新的</string>
-    <string name="update_tip">正在升级</string>
     <string name="i_see">我知道了</string>
-    <string name="down_load_on_bg">后台下载</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -25,4 +23,7 @@
     <string name="tools">工具</string>
     <string name="update_app_fail">升级包下载失败，可手动重试...</string>
     <string name="long_text">大家都知道 Android 的 Activity 是存着历史栈的，比如从 A -> B -> C，C 完成 finish 后回到 B，把所有的Activity 都 finish了，程序就自然退出了。 当然在 finish 的同时也需要是否自己程序的其他资源。所以需要想个办法把 Activity 给存起来。然后在程序退出的地方调用它们的 finish（）方法。</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
 </resources>

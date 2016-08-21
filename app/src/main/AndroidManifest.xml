@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:theme="@style/SplashTheme"
             android:name=".activity.SplashActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,6 +33,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pythoncat.nocat.base.BaseAppCompactActivity" />
         </activity>
+        <activity android:name=".activity.SettingsActivity"></activity>
     </application>
 
 </manifest>
