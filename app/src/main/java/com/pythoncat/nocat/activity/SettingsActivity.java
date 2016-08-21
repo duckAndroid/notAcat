@@ -9,7 +9,6 @@ import com.pythoncat.nocat.Configs;
 import com.pythoncat.nocat.R;
 import com.pythoncat.nocat.base.BaseAppCompactActivity;
 import com.pythoncat.nocat.utils.SpUtils;
-import com.pythoncat.proxy.util.ToastHelper;
 import com.pythoncat.proxy.view.SettingsItemView;
 
 /**
@@ -34,7 +33,6 @@ public class SettingsActivity extends BaseAppCompactActivity {
         itemView.setOnClickListener(v -> {
             SpUtils.setAutoUpdate(!SpUtils.isAutoUpdate());
             itemView.setChecked(SpUtils.isAutoUpdate());
-            ToastHelper.showShort("我被人点了");
         });
     }
 

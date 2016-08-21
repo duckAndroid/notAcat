@@ -16,6 +16,8 @@ import okio.Buffer;
 
 /**
  * Created by zhy on 16/3/1.
+ * @author zhy
+ * 可以打印url 的日志拦截器
  */
 public class LoggerInterceptor implements Interceptor
 {
