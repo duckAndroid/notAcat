@@ -1,11 +1,11 @@
 package com.pythoncat.nocat.engine;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
 import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.nocat.utils.PathUtil;
+import com.pythoncat.proxy.App;
 import com.pythoncat.proxy.bean.Download;
 import com.pythoncat.proxy.bean.Update;
 import com.pythoncat.proxy.net.okhttp.UpdateApp;
@@ -35,10 +35,10 @@ public class UpdateEngine extends Engine {
      * @return newly apk
      */
     public static Observable<Download> updateApk(String url) {
-        return UpdateApp.downloadFileWithProgress(url, getCacheDir(), apkFile);
+        return UpdateApp.downloadInOkhttpUtils(url, getNewlyPackageDir(), apkFile);
     }
 
-    public static void openApk(Activity ac) {
+    public static void openApk() {
         File apk = getNewlyApk();
         LogUtils.e("OpenFile", apk);
         try {
@@ -47,7 +47,8 @@ public class UpdateEngine extends Engine {
             intent.setAction(android.content.Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(apk),
                     "application/vnd.android.package-archive");
-            ac.startActivity(intent);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            App.get().startActivity(intent);
         } catch (Exception e) {
             LogUtils.e(e);
             ToastHelper.showShort("安装更新包失败，请手动安装");
@@ -55,7 +56,7 @@ public class UpdateEngine extends Engine {
     }
 
     private static File getNewlyApk() {
-        return new File(getCacheDir(), apkFile);
+        return new File(getNewlyPackageDir(), apkFile);
     }
 
     public static void deleteCacheNewly() {

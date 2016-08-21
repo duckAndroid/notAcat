@@ -6,7 +6,7 @@ package com.pythoncat.proxy.bean;
  */
 public class Download {
 
-    public long progress;
+    public float progress;
     public long total;
     public boolean done;
     /**
@@ -14,7 +14,7 @@ public class Download {
      */
     public String destPath;
 
-    public Download(long progress, long total, boolean done, String destPath) {
+    public Download(float progress, long total, boolean done, String destPath) {
         this.progress = progress;
         this.total = total;
         this.done = done;

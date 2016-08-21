@@ -83,7 +83,7 @@ public class ToolsFragment extends BaseFragment {
                 ToastHelper.showShort("dian w le");
                 LogUtils.e("dian w le");
             };
-            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.drawableId = R.drawable.cat01;
             ob.title = "shou ji fang dao";
             tools.add(ob);
         }
@@ -93,7 +93,7 @@ public class ToolsFragment extends BaseFragment {
                 LogUtils.e("dian w le");
                 ToastHelper.showShort("dian w le");
             };
-            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.drawableId = R.drawable.cat02 ;
             ob.title = "shou ji fang dao";
             tools.add(ob);
         }
@@ -103,7 +103,7 @@ public class ToolsFragment extends BaseFragment {
                 LogUtils.e("dian w le");
                 ToastHelper.showShort("dian w le");
             };
-            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.drawableId = R.drawable.cat03;
             ob.title = "shou ji fang dao";
             tools.add(ob);
         }
@@ -113,7 +113,7 @@ public class ToolsFragment extends BaseFragment {
                 LogUtils.e("dian w le");
                 ToastHelper.showShort("dian w le");
             };
-            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.drawableId = R.drawable.cat04;
             ob.title = "shou ji fang dao";
             tools.add(ob);
         }
@@ -123,7 +123,17 @@ public class ToolsFragment extends BaseFragment {
                 ToastHelper.showShort("dian w le");
                 LogUtils.e("dian w le");
             };
-            ob.drawableId = R.drawable.ic_menu_camera;
+            ob.drawableId = R.drawable.cat05;
+            ob.title = "shou ji fang dao";
+            tools.add(ob);
+        }
+        {
+            Tool ob = new Tool();
+            ob.clickListener = v -> {
+                ToastHelper.showShort("dian w le");
+                LogUtils.e("dian w le");
+            };
+            ob.drawableId = R.drawable.cat06;
             ob.title = "shou ji fang dao";
             tools.add(ob);
         }

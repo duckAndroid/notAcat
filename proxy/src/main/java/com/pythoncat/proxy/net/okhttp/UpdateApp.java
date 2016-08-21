@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.pythoncat.proxy.bean.Download;
 import com.pythoncat.proxy.bean.Update;
 import com.pythoncat.proxy.util.FileUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.FileCallBack;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,7 +28,7 @@ import rx.schedulers.Schedulers;
 public class UpdateApp {
 
     /**
-     * 从文件中读取字符串信息
+     * 文件下载
      *
      * @param url       fileUrl
      * @param localName 下载到本地保存的文件名 ｛路径：App.get().getFilesDir();｝
@@ -89,6 +91,8 @@ public class UpdateApp {
     }
 
     /**
+     * 下载文件（不支持断点）
+     *
      * @param url       fileUrl
      * @param localName 下载到本地保存的文件名 ｛路径：App.get().getFilesDir();｝
      * @param dirPath   保存的文件所在目录
@@ -121,4 +125,41 @@ public class UpdateApp {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+
+    public static Observable<Download> downloadInOkhttpUtils(String url, String destFileDir, String destFileName) {
+
+        return Observable.create(new Observable.OnSubscribe<Download>() {
+            @Override
+            public void call(Subscriber<? super Download> subscriber) {
+                OkHttpUtils
+                        .get()//
+                        .url(url)//
+                        .build()//
+                        .execute(new FileCallBack(destFileDir, destFileName) {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                call.cancel();
+                                LogUtils.e(e);
+                                LogUtils.e("error id = " + id);
+                                subscriber.onError(e);
+                            }
+
+                            @Override
+                            public void onResponse(File response, int id) {
+                                LogUtils.e("success id = " + id);
+                                subscriber.onNext(new Download(0, 0, true, response.getAbsolutePath()));
+                                subscriber.onCompleted();
+                            }
+
+                            @Override
+                            public void inProgress(float progress, long total, int id) {
+                                super.inProgress(progress, total, id);
+                                subscriber.onNext(new Download(progress, total, true, null));
+                                LogUtils.d("okhttp downlad file ===> " + progress + " ,,,, " + total);
+                            }
+                        });
+            }
+        });
+
+    }
 }

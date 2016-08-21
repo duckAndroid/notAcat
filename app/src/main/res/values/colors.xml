@@ -6,4 +6,5 @@
     <color name="white">#fff</color>
     <color name="gray">@android:color/darker_gray</color>
     <color name="normal_line">#7c000000</color>
+    <color name="normal_gray">#7cffffff</color>
 </resources>

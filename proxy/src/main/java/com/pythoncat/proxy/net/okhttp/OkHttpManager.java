@@ -6,6 +6,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -62,6 +63,9 @@ public class OkHttpManager {
         return new OkHttpClient.Builder()
                 .sslSocketFactory(sslContext.getSocketFactory(),
                         Platform.get().trustManager(sslContext.getSocketFactory()))
+                .addInterceptor(new LoggerInterceptor("okhttp:",true)) // 输出 完整 url
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .hostnameVerifier(DO_NOT_VERIFY);
     }
 }

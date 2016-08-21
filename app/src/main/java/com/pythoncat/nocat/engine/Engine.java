@@ -1,8 +1,10 @@
 package com.pythoncat.nocat.engine;
 
+import android.os.Environment;
 import android.support.annotation.NonNull;
 
 import com.pythoncat.proxy.App;
+import com.pythoncat.proxy.util.PackageUtil;
 
 import java.io.File;
 
@@ -29,9 +31,13 @@ public abstract class Engine {
      * @return dir
      */
     @NonNull
-    protected static String getCacheDir() {
-        File dir = App.get().getCacheDir();
-        return dir.getAbsolutePath();
+    protected static String getNewlyPackageDir() {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            File dir = new File(Environment.getExternalStorageDirectory(), PackageUtil.getAppName(App.get()));
+            return dir.getAbsolutePath();
+        } else {
+            throw new RuntimeException(" sdcard unmounted!!!");
+        }
     }
 
 }

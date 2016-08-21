@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 
 /**
  * Created by pythonCat on 2016/8/14 0014.
+ *
+ * @author pythonCat
  */
 public class PackageUtil {
 
@@ -33,11 +35,24 @@ public class PackageUtil {
      */
     public static int getVersionCode(Context context) {
         try {
-            PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
             return pi.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    public static String getAppName(Context context) {
+        try {
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            pi.applicationInfo.loadLabel(pm).toString();
+            return pi.applicationInfo.loadLabel(pm).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "catApp";
         }
     }
 }

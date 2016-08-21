@@ -23,7 +23,6 @@ public class BaseAppCompactActivity extends AppCompatActivity implements ToolsFr
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         EventBusUtil.unregister(this);
     }
 
@@ -38,6 +37,14 @@ public class BaseAppCompactActivity extends AppCompatActivity implements ToolsFr
             }
         }
         return this;
+    }
+
+    public boolean isFinished(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return isDestroyed() && isFinishing();
+        } else {
+            return isFinishing();
+        }
     }
 
     @Override

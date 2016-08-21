@@ -23,4 +23,5 @@
     <string name="gallery">相册</string>
     <string name="video">视频</string>
     <string name="tools">工具</string>
+    <string name="update_app_fail">升级包下载失败，可手动重试...</string>
 </resources>

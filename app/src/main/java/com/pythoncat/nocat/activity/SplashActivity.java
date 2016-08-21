@@ -21,7 +21,6 @@ import com.pythoncat.proxy.bean.Update;
 import com.pythoncat.proxy.util.PackageUtil;
 
 import rx.Subscription;
-import rx.functions.Action1;
 
 /**
  * @author pythonCat
@@ -30,7 +29,7 @@ import rx.functions.Action1;
 public class SplashActivity extends BaseAppCompactActivity {
 
     private CoordinatorLayout container;
-    private AppDialogHelper appUpdate;
+    private AppDialogHelper appUpdateDialog;
     private Subscription checkS;
     private Subscription updateApkS;
     private NotificationCompat.Builder builder;
@@ -40,9 +39,13 @@ public class SplashActivity extends BaseAppCompactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        init();
-        checkVersion();
+        if (NotifyHelperSimple.isShowing()) {
+            startMain();
+        } else {
+            setContentView(R.layout.activity_splash);
+            init();
+            checkVersion();
+        }
     }
 
     private void init() {
@@ -55,7 +58,6 @@ public class SplashActivity extends BaseAppCompactActivity {
         callback = new Snackbar.Callback() {
             @Override
             public void onDismissed(Snackbar snackbar, int event) {
-
                 switch (event) {
                     case Snackbar.Callback.DISMISS_EVENT_ACTION: // "Snackbar通过Action的点击事件退出"
                         LogUtils.w("Snackbar通过Action的点击事件退出");
@@ -77,23 +79,22 @@ public class SplashActivity extends BaseAppCompactActivity {
         LogUtils.w("localVersionCode = " + localCode);
         RxJavaUtil.close(checkS);
         checkS = UpdateEngine.checkVersion()
-                .subscribe( po -> {
+                .subscribe(po -> {
                     LogUtils.w("localVersionCode = " + localCode + " , netVersionCode =  " + po.versionCode);
                     if (localCode < po.versionCode) {
+                        //  todo 检测到新版本 ，询问是否下载
                         Snackbar.make(container, R.string.can_update, Snackbar.LENGTH_LONG)
                                 .setCallback(callback)
-                                .setAction(R.string.update_now, v -> updateApk(e -> {
-                                    LogUtils.e("error");
-                                    LogUtils.e(e);
-                                }, po))
+                                .setAction(R.string.update_now, v -> updateApk(po))
                                 .show();
                     } else {
+                        // todo 没有新版本，提示不用更新
                         Snackbar.make(container, R.string.cannot_update, Snackbar.LENGTH_LONG)
                                 .setCallback(callback)
                                 .show();
                     }
                 }, e -> {
-                    LogUtils.e("error");
+                    LogUtils.e("检测版本更新出错...");
                     LogUtils.e(e);
                     Snackbar.make(container, R.string.check_version_fail, Snackbar.LENGTH_LONG)
                             .setCallback(callback)
@@ -101,50 +102,67 @@ public class SplashActivity extends BaseAppCompactActivity {
                 }, () -> LogUtils.w("completed!!!!"));
     }
 
-    private void updateApk(Action1<Throwable> error, Update po) {
+    /**
+     * 点击 snackbar 的更新 按钮
+     *
+     * @param po pojo
+     */
+    private void updateApk(Update po) {
         //
         LogUtils.e("现在更新........!!! todo");
-        if (appUpdate == null) {
-            appUpdate = new AppDialogHelper(get(), v -> {
-                appUpdate.cancel();
+        if (appUpdateDialog == null) {
+            appUpdateDialog = new AppDialogHelper(get(), v -> {
+                // 后台下载按钮的点击  todo --> 进入主界面，后台继续下载
+                appUpdateDialog.cancel();
                 NotifyHelperSimple.show(manager, builder, "我第一个被发现", "我是标题", "我是内容");
+                startMain();
             });
         }
-        appUpdate.showDialog();
+        appUpdateDialog.showDialog();
         RxJavaUtil.close(updateApkS);
         updateApkS = UpdateEngine.updateApk(po.updateUrl)
                 .subscribe(download -> {
-                            int progress = (int) (download.progress * 1f / download.total * 100f);
+                            int progress = (int) (100 * download.progress);
+                            LogUtils.i("update progress in ui===>" + progress + " ,,,, XXXXXXXXXXXXXXX");
                             if (progress <= 1) progress = 1;
-                            LogUtils.w("progress====" + progress + ", p=" + download.progress + " , to=" + download.total);
-                            appUpdate.pbProgress.setProgress(progress);
+                            appUpdateDialog.pbProgress.setProgress(progress);
                             NotifyHelperSimple.update(manager, builder, progress, "下载完成！");
-                        }, error,
+                        }, e -> {
+                            //  todo 更新apk出错的回调
+                            LogUtils.e("下载更新包出错.....");
+                            appUpdateDialog.cancel();
+                            Snackbar.make(container, R.string.update_app_fail, Snackbar.LENGTH_LONG)
+                                    .setCallback(callback)
+                                    .show();
+                            LogUtils.e(e);
+                        },
                         () -> {
-                            appUpdate.cancel();
-                            LogUtils.e("completed!!!!");
+                            appUpdateDialog.cancel();
+                            LogUtils.e("下载更新包完成 ... completed!!!!");
                             openNewlyApk();
+                            NotifyHelperSimple.cancel(manager);
                         });
     }
 
     private void openNewlyApk() {
-        UpdateEngine.openApk(get());
+        UpdateEngine.openApk();
     }
 
     private void startMain() {
-        startActivity(new Intent(get(), MainActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        finish();
+        if (!isFinished()) {
+            startActivity(new Intent(get(), MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            finish();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (appUpdate != null) {
-            appUpdate.cancel();
+        if (appUpdateDialog != null) {
+            appUpdateDialog.cancel();
         }
         RxJavaUtil.close(updateApkS);
         RxJavaUtil.close(checkS);
-        NotifyHelperSimple.cancel(manager);
     }
 }
