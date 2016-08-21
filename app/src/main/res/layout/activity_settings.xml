@@ -22,19 +22,13 @@
             <com.pythoncat.proxy.view.SettingsItemView
                 android:id="@+id/settings_item01"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="64dp"
                 android:visibility="visible"
                 app:checked="true"
                 app:text="@string/auto_update"
                 app:textcolor="#fff"
-                app:textsize="12sp" />
+                app:textsize="16sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center_vertical"
-                android:text="自动升级"
-                android:textSize="12sp" />
 
         </LinearLayout>
     </ScrollView>

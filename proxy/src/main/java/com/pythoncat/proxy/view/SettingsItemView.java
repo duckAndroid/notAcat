@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -42,12 +43,14 @@ public class SettingsItemView extends FrameLayout {
 
     public SettingsItemView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        if (isInEditMode()) return;
         init(context, attrs);
     }
 
     private void init(Context context, AttributeSet attrs) {
         View rootView = LayoutInflater.from(context).inflate(R.layout.item_settings, this, false);
-        addView(rootView);
+        addView(rootView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
         cbCheck = (CheckBox) rootView.findViewById(R.id.setting_item_checkbox);
         tvTitle = (TextView) rootView.findViewById(R.id.setting_item_title);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingsItemView);
@@ -57,6 +60,7 @@ public class SettingsItemView extends FrameLayout {
         int textSize = ta.getDimensionPixelSize(R.styleable.SettingsItemView_textsize, UiUtils.sp2px(16));
 
         LogUtils.e(" text size == =" + textSize);
+        if (isInEditMode())return;
         tvTitle.setTextSize(UiUtils.px2sp(textSize)); // 默认单位是sp
         tvTitle.setText(titleText);
         tvTitle.setTextColor(textColor);

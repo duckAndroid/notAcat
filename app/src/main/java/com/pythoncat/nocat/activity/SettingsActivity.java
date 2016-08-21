@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import com.pythoncat.nocat.Configs;
 import com.pythoncat.nocat.R;
 import com.pythoncat.nocat.base.BaseAppCompactActivity;
+import com.pythoncat.nocat.utils.SpUtils;
 import com.pythoncat.proxy.util.ToastHelper;
 import com.pythoncat.proxy.view.SettingsItemView;
 
@@ -29,8 +30,10 @@ public class SettingsActivity extends BaseAppCompactActivity {
     private void initContent() {
         SettingsItemView itemView = (SettingsItemView) findViewById(R.id.settings_item01);
         assert itemView != null;
+        itemView.setChecked(SpUtils.isAutoUpdate());
         itemView.setOnClickListener(v -> {
-            itemView.setChecked(!itemView.isChecked());
+            SpUtils.setAutoUpdate(!SpUtils.isAutoUpdate());
+            itemView.setChecked(SpUtils.isAutoUpdate());
             ToastHelper.showShort("我被人点了");
         });
     }
