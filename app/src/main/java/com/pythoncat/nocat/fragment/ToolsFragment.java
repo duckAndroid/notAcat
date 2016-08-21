@@ -1,16 +1,16 @@
-package com.pythoncat.nocat;
+package com.pythoncat.nocat.fragment;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.apkfuns.logutils.LogUtils;
+import com.pythoncat.nocat.R;
 import com.pythoncat.nocat.adapter.ToolsAdapter;
 import com.pythoncat.nocat.base.BaseFragment;
 import com.pythoncat.nocat.bean.Tool;
@@ -21,12 +21,8 @@ import java.util.List;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ToolsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ToolsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @author pythonCat
+ *         工具箱
  */
 public class ToolsFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
@@ -93,7 +89,7 @@ public class ToolsFragment extends BaseFragment {
                 LogUtils.e("dian w le");
                 ToastHelper.showShort("dian w le");
             };
-            ob.drawableId = R.drawable.cat02 ;
+            ob.drawableId = R.drawable.cat02;
             ob.title = "shou ji fang dao";
             tools.add(ob);
         }

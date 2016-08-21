@@ -1,17 +1,34 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pythoncat.nocat.ToolsFragment">
+    android:layout_margin="0dp"
+    android:orientation="vertical"
+    android:padding="0dp"
+    tools:context=".fragment.ToolsFragment">
+
+    <com.pythoncat.nocat.view.FocusedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ellipsize="marquee"
+        android:focusableInTouchMode="true"
+        android:lines="1"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:text="@string/long_text"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp" />
 
     <com.pythoncat.nocat.view.NoScrollGridView
         android:id="@+id/tools_guide_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="0dp"
         android:background="@color/gray"
         android:horizontalSpacing="0.5dp"
         android:verticalSpacing="0.5dp">
 
     </com.pythoncat.nocat.view.NoScrollGridView>
 
-</FrameLayout>
+</LinearLayout>

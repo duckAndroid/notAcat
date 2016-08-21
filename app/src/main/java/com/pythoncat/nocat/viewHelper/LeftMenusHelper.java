@@ -5,12 +5,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.pythoncat.nocat.R;
-import com.pythoncat.nocat.ToolsFragment;
 import com.pythoncat.nocat.activity.MainActivity;
 import com.pythoncat.nocat.base.BaseFragment;
 import com.pythoncat.nocat.fragment.CameraFragment;
 import com.pythoncat.nocat.fragment.HeadFragment;
-import com.pythoncat.nocat.view.BadgeView;
+import com.pythoncat.nocat.fragment.ToolsFragment;
 
 /**
  * Created by pythonCat on 2016/8/21 0021.
@@ -63,14 +62,7 @@ public class LeftMenusHelper {
     private void replaceFragment(BaseFragment bf) {
         mActivity.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container,
-                        bf)
+                .replace(R.id.fragment_container,bf)
                 .commit();
-    }
-
-    public void setBadge(View target, int badge) {
-        BadgeView badgeView = new BadgeView(mActivity);
-        badgeView.setTargetView(target);
-        badgeView.setBadgeCount(badge);
     }
 }
