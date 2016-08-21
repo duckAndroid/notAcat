@@ -2,9 +2,11 @@ package com.pythoncat.proxy.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -25,34 +27,42 @@ public class SettingsItemView extends FrameLayout {
     private CheckBox cbCheck;
 
     public SettingsItemView(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public SettingsItemView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public SettingsItemView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        this(context, attrs, 0);
     }
 
     @TargetApi(21)
     public SettingsItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context);
+        this(context, attrs, defStyleAttr);
     }
 
-    private void init(Context context) {
-        View rootView = View.inflate(context, R.layout.item_settings, this);
-        addView(rootView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        initChildren(context, rootView);
+    public SettingsItemView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs);
     }
 
-    private void initChildren(Context context, View rootView) {
-        tvTitle = (TextView) rootView.findViewById(R.id.setting_item_title);
+    private void init(Context context, AttributeSet attrs) {
+        View rootView = LayoutInflater.from(context).inflate(R.layout.item_settings, this, false);
+        addView(rootView);
         cbCheck = (CheckBox) rootView.findViewById(R.id.setting_item_checkbox);
+        tvTitle = (TextView) rootView.findViewById(R.id.setting_item_title);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingsItemView);
+        boolean check = ta.getBoolean(R.styleable.SettingsItemView_checked, false);
+        String titleText = ta.getString(R.styleable.SettingsItemView_text);
+        int textColor = ta.getColor(R.styleable.SettingsItemView_textcolor, 0);
+        float textSize = ta.getDimension(R.styleable.SettingsItemView_textsize, TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP, 20, getResources().getDisplayMetrics()));
+        tvTitle.setTextSize(textSize);
+        tvTitle.setText(titleText);
+        tvTitle.setTextColor(textColor);
+        cbCheck.setChecked(check);
+        ta.recycle();
     }
+
+    // #################  public interface
 
     public void setText(CharSequence ch) {
         tvTitle.setText(ch);
@@ -68,5 +78,17 @@ public class SettingsItemView extends FrameLayout {
 
     public boolean isChecked() {
         return cbCheck.isChecked();
+    }
+
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+    }
+
+    public int getVisibility() {
+        return super.getVisibility();
+    }
+
+    public void setOnClickListener(View.OnClickListener listener) {
+        super.setOnClickListener(listener);
     }
 }

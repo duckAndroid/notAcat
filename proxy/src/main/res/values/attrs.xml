@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
+    <attr name="text" format="string" />
+    <attr name="checked" format="boolean" />
+    <attr name="textcolor" format="color" />
+    <attr name="textsize" format="dimension" />
+    <declare-styleable name="SettingsItemView">
+        <attr name="text" />
+        <attr name="checked" />
+        <attr name="textcolor" />
+        <attr name="textsize" />
+    </declare-styleable>
 </resources>

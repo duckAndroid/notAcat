@@ -7,7 +7,7 @@
     android:padding="0dp"
     tools:context=".fragment.ToolsFragment">
 
-    <com.pythoncat.nocat.view.FocusedTextView
+    <com.pythoncat.proxy.view.FocusedTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -20,7 +20,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="14sp" />
 
-    <com.pythoncat.nocat.view.NoScrollGridView
+    <com.pythoncat.proxy.view.NoScrollGridView
         android:id="@+id/tools_guide_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,6 +29,6 @@
         android:horizontalSpacing="0.5dp"
         android:verticalSpacing="0.5dp">
 
-    </com.pythoncat.nocat.view.NoScrollGridView>
+    </com.pythoncat.proxy.view.NoScrollGridView>
 
 </LinearLayout>
