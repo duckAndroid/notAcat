@@ -1,4 +1,4 @@
-package com.pythoncat.nocat.utils;
+package com.pythoncat.proxy.util;
 
 import com.pythoncat.proxy.App;
 
@@ -19,4 +19,15 @@ public class UiUtils {
         final float scale = App.getResources().getDisplayMetrics().density;
         return (int) (px / scale + 0.5f);
     }
+
+    public static int sp2px( float spValue) {
+        float fontScale = App.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
+    public static int px2sp( float pxValue) {
+        float fontScale =  App.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
 }

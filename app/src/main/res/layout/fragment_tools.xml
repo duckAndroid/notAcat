@@ -27,8 +27,6 @@
         android:layout_margin="0dp"
         android:background="@color/gray"
         android:horizontalSpacing="0.5dp"
-        android:verticalSpacing="0.5dp">
-
-    </com.pythoncat.proxy.view.NoScrollGridView>
+        android:verticalSpacing="0.5dp"/>
 
 </LinearLayout>

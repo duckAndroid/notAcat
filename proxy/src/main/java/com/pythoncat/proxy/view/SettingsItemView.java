@@ -4,14 +4,15 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.proxy.R;
+import com.pythoncat.proxy.util.UiUtils;
 
 /**
  * Created by pythonCat on 2016/8/21 0021.
@@ -53,9 +54,10 @@ public class SettingsItemView extends FrameLayout {
         boolean check = ta.getBoolean(R.styleable.SettingsItemView_checked, false);
         String titleText = ta.getString(R.styleable.SettingsItemView_text);
         int textColor = ta.getColor(R.styleable.SettingsItemView_textcolor, 0);
-        float textSize = ta.getDimension(R.styleable.SettingsItemView_textsize, TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_SP, 20, getResources().getDisplayMetrics()));
-        tvTitle.setTextSize(textSize);
+        int textSize = ta.getDimensionPixelSize(R.styleable.SettingsItemView_textsize, UiUtils.sp2px(16));
+
+        LogUtils.e(" text size == =" + textSize);
+        tvTitle.setTextSize(UiUtils.px2sp(textSize)); // 默认单位是sp
         tvTitle.setText(titleText);
         tvTitle.setTextColor(textColor);
         cbCheck.setChecked(check);

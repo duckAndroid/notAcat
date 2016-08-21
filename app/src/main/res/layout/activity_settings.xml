@@ -19,8 +19,15 @@
             android:visibility="visible"
             app:checked="true"
             app:text="@string/auto_update"
-            app:textcolor="@color/colorAccent"
-            app:textsize="12sp" />
+            app:textcolor="#fff"
+            app:textsize="11sp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="自动升级"
+            android:textSize="11sp" />
 
     </LinearLayout>
 </ScrollView>
