@@ -154,7 +154,9 @@ public class UpdateApp {
                             @Override
                             public void inProgress(float progress, long total, int id) {
                                 super.inProgress(progress, total, id);
-                                subscriber.onNext(new Download(progress, total, true, null));
+                                if (progress != 1) {
+                                    subscriber.onNext(new Download(progress, total, false, null));
+                                }
                                 LogUtils.d("okhttp downlad file ===> " + progress + " ,,,, " + total);
                             }
                         });

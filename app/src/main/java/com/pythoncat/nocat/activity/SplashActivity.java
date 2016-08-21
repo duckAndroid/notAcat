@@ -124,7 +124,7 @@ public class SplashActivity extends BaseAppCompactActivity {
                 .subscribe(download -> {
                             int progress = (int) (100 * download.progress);
                             LogUtils.i("update progress in ui===>" + progress + " ,,,, XXXXXXXXXXXXXXX");
-                            if (progress <= 1) progress = 1;
+                            if (progress <= 1 && !download.done) progress = 1;
                             appUpdateDialog.pbProgress.setProgress(progress);
                             NotifyHelperSimple.update(manager, builder, progress, "下载完成！");
                         }, e -> {
