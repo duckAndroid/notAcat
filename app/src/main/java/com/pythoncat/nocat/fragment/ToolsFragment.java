@@ -158,13 +158,10 @@ public class ToolsFragment extends BaseFragment {
         }
         {
             Tool ob = new Tool();
-            ob.clickListener = v -> {
-                ToastHelper.showShort("dian w le");
-                LogUtils.e("dian w le");
-                startActivity(new Intent(get(), SettingsActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        .putExtra(Configs.itemTitleKey, ob.title));
-            };
+            ob.clickListener = v ->
+                    startActivity(new Intent(get(), SettingsActivity.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            .putExtra(Configs.itemTitleKey, ob.title));
             ob.drawableId = R.drawable.cat06;
             ob.title = "设置中心";
             tools.add(ob);

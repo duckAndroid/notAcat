@@ -13,6 +13,7 @@ import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.nocat.R;
 import com.pythoncat.nocat.base.BaseAppCompactActivity;
 import com.pythoncat.nocat.engine.UpdateEngine;
+import com.pythoncat.nocat.utils.SpUtils;
 import com.pythoncat.proxy.App;
 import com.pythoncat.proxy.base.RxJavaUtil;
 import com.pythoncat.proxy.bean.Update;
@@ -39,7 +40,7 @@ public class SplashActivity extends BaseAppCompactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (NotifyHelperSimple.isShowing()) {
+        if (NotifyHelperSimple.isShowing() || !SpUtils.isAutoUpdate()) {
             startMain();
         } else {
             setContentView(R.layout.activity_splash);

@@ -59,7 +59,7 @@ public class SettingsItemView extends FrameLayout {
         int textColor = ta.getColor(R.styleable.SettingsItemView_textcolor, 0);
         int textSize = ta.getDimensionPixelSize(R.styleable.SettingsItemView_textsize, UiUtils.sp2px(16));
 
-        LogUtils.e(" text size == =" + textSize);
+        LogUtils.i(" text size == =" + textSize);
         if (isInEditMode())return;
         tvTitle.setTextSize(UiUtils.px2sp(textSize)); // 默认单位是sp
         tvTitle.setText(titleText);

@@ -10,13 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 
 import com.pythoncat.nocat.R;
-import com.pythoncat.nocat.base.BaseAppCompactActivity;
+import com.pythoncat.nocat.base.DoubleClickExitActivity;
 import com.pythoncat.nocat.viewHelper.LeftMenusHelper;
 
 /**
  * @author pythonCat
  */
-public class MainActivity extends BaseAppCompactActivity {
+public class MainActivity extends DoubleClickExitActivity {
 
     private ActionBarDrawerToggle toggle;
 
@@ -67,6 +67,7 @@ public class MainActivity extends BaseAppCompactActivity {
             super.onBackPressed();
         }
     }
+
     public void closeDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         assert drawer != null;
