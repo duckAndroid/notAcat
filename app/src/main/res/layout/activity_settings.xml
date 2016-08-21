@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.pythoncat.nocat.activity.SettingsActivity">
 
-    <LinearLayout
-        android:id="@+id/settings_layout"
+    <include layout="@layout/toolbar_view" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.pythoncat.proxy.view.SettingsItemView
-            android:id="@+id/settings_item01"
+        <LinearLayout
+            android:id="@+id/settings_layout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:visibility="visible"
-            app:checked="true"
-            app:text="@string/auto_update"
-            app:textcolor="#fff"
-            app:textsize="12sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="自动升级"
-            android:textSize="12sp" />
+            <com.pythoncat.proxy.view.SettingsItemView
+                android:id="@+id/settings_item01"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="visible"
+                app:checked="true"
+                app:text="@string/auto_update"
+                app:textcolor="#fff"
+                app:textsize="12sp" />
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:text="自动升级"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

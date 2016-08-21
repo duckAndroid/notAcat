@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.apkfuns.logutils.LogUtils;
+import com.pythoncat.nocat.Configs;
 import com.pythoncat.nocat.R;
 import com.pythoncat.nocat.activity.SettingsActivity;
 import com.pythoncat.nocat.adapter.ToolsAdapter;
@@ -161,7 +162,8 @@ public class ToolsFragment extends BaseFragment {
                 ToastHelper.showShort("dian w le");
                 LogUtils.e("dian w le");
                 startActivity(new Intent(get(), SettingsActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .putExtra(Configs.itemTitleKey, ob.title));
             };
             ob.drawableId = R.drawable.cat06;
             ob.title = "设置中心";
