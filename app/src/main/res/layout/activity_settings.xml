@@ -20,14 +20,26 @@
             android:orientation="vertical">
 
             <com.pythoncat.proxy.view.SettingsItemView
-                android:id="@+id/settings_item01"
+                android:id="@+id/settings_item_auto_update"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:visibility="visible"
                 app:checked="true"
                 app:text="@string/auto_update"
-                app:textcolor="#fff"
-                app:textsize="16sp" />
+                app:textcolor="@color/white_text_selector"
+                app:textsize="16sp"
+                app:underlinebackground="@drawable/white_bg_selector" />
+
+            <com.pythoncat.proxy.view.SettingsItemView
+                android:id="@+id/settings_item_security"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:visibility="visible"
+                app:checked="true"
+                app:text="@string/auto_update"
+                app:textcolor="@color/white_text_selector"
+                app:textsize="16sp"
+                app:underlinebackground="@drawable/white_bg_selector" />
 
 
         </LinearLayout>

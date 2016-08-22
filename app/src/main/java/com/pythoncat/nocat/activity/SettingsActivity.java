@@ -9,6 +9,7 @@ import com.pythoncat.nocat.Configs;
 import com.pythoncat.nocat.R;
 import com.pythoncat.nocat.base.BaseAppCompactActivity;
 import com.pythoncat.nocat.utils.SpUtils;
+import com.pythoncat.proxy.App;
 import com.pythoncat.proxy.view.SettingsItemView;
 
 /**
@@ -27,13 +28,25 @@ public class SettingsActivity extends BaseAppCompactActivity {
     }
 
     private void initContent() {
-        SettingsItemView itemView = (SettingsItemView) findViewById(R.id.settings_item01);
-        assert itemView != null;
-        itemView.setChecked(SpUtils.isAutoUpdate());
-        itemView.setOnClickListener(v -> {
-            SpUtils.setAutoUpdate(!SpUtils.isAutoUpdate());
-            itemView.setChecked(SpUtils.isAutoUpdate());
-        });
+        {
+            SettingsItemView itemAutoUpdateView = getView(R.id.settings_item_auto_update);
+            assert itemAutoUpdateView != null;
+            itemAutoUpdateView.setText(App.getString(R.string.auto_update));
+            itemAutoUpdateView.setChecked(SpUtils.isAutoUpdate());
+            itemAutoUpdateView.setOnClickListener(v -> {
+                SpUtils.setAutoUpdate(!SpUtils.isAutoUpdate());
+                itemAutoUpdateView.setChecked(SpUtils.isAutoUpdate());
+            }); // auto update ?
+        }
+        {
+            SettingsItemView itemSecurityView = getView(R.id.settings_item_security);
+            itemSecurityView.setChecked(SpUtils.isOpenSecurity());
+            itemSecurityView.setText(App.getString(R.string.mobile_security));
+            itemSecurityView.setOnClickListener(v -> {
+                SpUtils.setOpenSecurity(!SpUtils.isOpenSecurity());
+                itemSecurityView.setChecked(SpUtils.isOpenSecurity());
+            }); // open security ?
+        }
     }
 
     @NonNull

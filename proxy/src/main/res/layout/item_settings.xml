@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@drawable/base_color_bg_selector"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
@@ -17,22 +19,25 @@
             android:layout_centerVertical="true"
             android:padding="3dp"
             android:text="@string/auto_update"
-            android:textColor="@drawable/white_text_selector"
+            android:textColor="@color/white_text_selector"
             android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/setting_item_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:checked="false"
             android:clickable="false"
             android:focusable="false" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@drawable/white_bg_border_selector" />
     </RelativeLayout>
-</FrameLayout>
+
+    <View
+        android:id="@+id/setting_item_under_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorAccent" />
+</LinearLayout>

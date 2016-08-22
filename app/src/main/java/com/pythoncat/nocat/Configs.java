@@ -11,4 +11,5 @@ public interface Configs {
     String itemTitleKey = "item_title";
     String settingsSp = "settings_sp"; // 设置中心的配置信息存放的xml文件名
     String settingsSpAutoUpdate = "settings_sp_auto_update"; // 是否自动更新app\\ key
+    String settingsSpOpenSecurity = "settings_sp_open_security"; // 是否打开手机防盗app\\ key
 }

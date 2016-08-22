@@ -17,6 +17,7 @@ import com.pythoncat.nocat.activity.SettingsActivity;
 import com.pythoncat.nocat.adapter.ToolsAdapter;
 import com.pythoncat.nocat.base.BaseFragment;
 import com.pythoncat.nocat.bean.Tool;
+import com.pythoncat.proxy.App;
 import com.pythoncat.proxy.util.ToastHelper;
 
 import java.util.LinkedList;
@@ -83,7 +84,7 @@ public class ToolsFragment extends BaseFragment {
                 LogUtils.e("dian w le");
             };
             ob.drawableId = R.drawable.cat01;
-            ob.title = "手机防盗";
+            ob.title = App.getString(R.string.mobile_security);
             tools.add(ob);
         }
         {

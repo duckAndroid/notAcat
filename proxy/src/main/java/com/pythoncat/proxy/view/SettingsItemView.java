@@ -2,7 +2,9 @@ package com.pythoncat.proxy.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ public class SettingsItemView extends FrameLayout {
 
     private TextView tvTitle;
     private CheckBox cbCheck;
+    private View underLine;
 
     public SettingsItemView(Context context) {
         this(context, null);
@@ -49,21 +52,23 @@ public class SettingsItemView extends FrameLayout {
 
     private void init(Context context, AttributeSet attrs) {
         View rootView = LayoutInflater.from(context).inflate(R.layout.item_settings, this, false);
-        addView(rootView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        addView(rootView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         cbCheck = (CheckBox) rootView.findViewById(R.id.setting_item_checkbox);
         tvTitle = (TextView) rootView.findViewById(R.id.setting_item_title);
+        underLine = rootView.findViewById(R.id.setting_item_under_line);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingsItemView);
         boolean check = ta.getBoolean(R.styleable.SettingsItemView_checked, false);
         String titleText = ta.getString(R.styleable.SettingsItemView_text);
-        int textColor = ta.getColor(R.styleable.SettingsItemView_textcolor, 0);
+        ColorStateList colorStateList = ta.getColorStateList(R.styleable.SettingsItemView_textcolor);
         int textSize = ta.getDimensionPixelSize(R.styleable.SettingsItemView_textsize, UiUtils.sp2px(16));
-
+        int underLineBackgroundRes = ta.getResourceId(R.styleable.SettingsItemView_underlinebackground, R.color.colorAccent);
         LogUtils.i(" text size == =" + textSize);
-        if (isInEditMode())return;
+        if (isInEditMode()) return;
+        underLine.setBackgroundResource(underLineBackgroundRes);
         tvTitle.setTextSize(UiUtils.px2sp(textSize)); // 默认单位是sp
         tvTitle.setText(titleText);
-        tvTitle.setTextColor(textColor);
+        tvTitle.setTextColor(colorStateList);
         cbCheck.setChecked(check);
         ta.recycle();
     }
@@ -86,12 +91,12 @@ public class SettingsItemView extends FrameLayout {
         return cbCheck.isChecked();
     }
 
-    public void setVisibility(int visibility) {
-        super.setVisibility(visibility);
+    public void setUnderLineBackgroundResource(int resource) {
+        underLine.setBackgroundResource(resource);
     }
 
-    public int getVisibility() {
-        return super.getVisibility();
+    public Drawable getUnderLineBackgroundResource() {
+        return underLine.getBackground();
     }
 
     public void setOnClickListener(View.OnClickListener listener) {

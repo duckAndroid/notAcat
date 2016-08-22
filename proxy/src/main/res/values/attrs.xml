@@ -2,12 +2,14 @@
 <resources>
     <attr name="text" format="string" />
     <attr name="checked" format="boolean" />
-    <attr name="textcolor" format="color" />
+    <attr name="textcolor" format="color"/>
     <attr name="textsize" format="dimension" />
+    <attr name="underlinebackground" format="reference" />
     <declare-styleable name="SettingsItemView">
         <attr name="text" />
         <attr name="checked" />
         <attr name="textcolor" />
         <attr name="textsize" />
+        <attr name="underlinebackground" />
     </declare-styleable>
 </resources>
